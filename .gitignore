@@ -15,3 +15,23 @@ nbproject
 .sass-cache
 .idea
 .dat*.*
+
+# Ignore bundler config.
+Gemfile.lock
+/.bundle
+
+# Ignore all bundle gems and Pods
+/vendor/bundle/
+/vendor/Pods/
+
+# Ignore .DS_Store
+.DS_Store
+
+# Ignore swap file
+*.swp
+
+# Ignore .dropbox
+.dropbox
+
+# Ignore "Icon\r"
+Icon^M^M

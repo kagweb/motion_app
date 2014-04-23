@@ -1,4 +1,4 @@
-class LeftViewController < UIViewController
+class MenuViewController < UIViewController
   def viewDidLoad
     super
 

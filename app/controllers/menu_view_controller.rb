@@ -1,6 +1,9 @@
-class MenuViewController < UIViewController
+# coding: utf-8
+class MenuViewController < UITableViewController
   def viewDidLoad
     super
+
+    @menus = ['メニューA', 'メニューB', 'メニューC']
 
     self.view.backgroundColor = UIColor.redColor
 
@@ -13,35 +16,55 @@ class MenuViewController < UIViewController
     @label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin
     self.view.addSubview(@label)
 
-    @hide = UIButton.buttonWithType(UIButtonTypeRoundedRect)
-    @hide.frame = CGRectMake(20.0, 20.0, 200.0, 40.0)
-    @hide.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin
-    @hide.setTitle("Hide Center", forState: UIControlStateNormal)
-    @hide.addTarget(self, action: '_hideTapped:', forControlEvents: UIControlEventTouchUpInside)
-    self.view.addSubview(@hide)
+    # @hide = UIButton.buttonWithType(UIButtonTypeRoundedRect)
+    # @hide.frame = CGRectMake(20.0, 20.0, 200.0, 40.0)
+    # @hide.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin
+    # @hide.setTitle("Hide Center", forState: UIControlStateNormal)
+    # @hide.addTarget(self, action: '_hideTapped:', forControlEvents: UIControlEventTouchUpInside)
+    # self.view.addSubview(@hide)
 
-    @show = UIButton.buttonWithType(UIButtonTypeRoundedRect)
-    @show.frame = @hide.frame
-    @show.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin
-    @show.setTitle("Show Center", forState:UIControlStateNormal)
-    @show.addTarget(self, action: '_showTapped:', forControlEvents: UIControlEventTouchUpInside)
-    @show.hidden = true
-    self.view.addSubview(@show)
+    # @show = UIButton.buttonWithType(UIButtonTypeRoundedRect)
+    # @show.frame = @hide.frame
+    # @show.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin
+    # @show.setTitle("Show Center", forState:UIControlStateNormal)
+    # @show.addTarget(self, action: '_showTapped:', forControlEvents: UIControlEventTouchUpInside)
+    # @show.hidden = true
+    # self.view.addSubview(@show)
 
-    @removeRightPanel = UIButton.buttonWithType(UIButtonTypeRoundedRect)
-    @removeRightPanel.frame = CGRectMake(20.0, 70.0, 200.0, 40.0)
-    @removeRightPanel.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin
-    @removeRightPanel.setTitle("Remove Right Panel", forState: UIControlStateNormal)
-    @removeRightPanel.addTarget(self, action: '_removeRightPanelTapped:', forControlEvents: UIControlEventTouchUpInside)
-    self.view.addSubview(@removeRightPanel)
+    # @removeRightPanel = UIButton.buttonWithType(UIButtonTypeRoundedRect)
+    # @removeRightPanel.frame = CGRectMake(20.0, 70.0, 200.0, 40.0)
+    # @removeRightPanel.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin
+    # @removeRightPanel.setTitle("Remove Right Panel", forState: UIControlStateNormal)
+    # @removeRightPanel.addTarget(self, action: '_removeRightPanelTapped:', forControlEvents: UIControlEventTouchUpInside)
+    # self.view.addSubview(@removeRightPanel)
 
-    @addRightPanel = UIButton.buttonWithType(UIButtonTypeRoundedRect)
-    @addRightPanel.frame = @removeRightPanel.frame
-    @addRightPanel.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin
-    @addRightPanel.setTitle("Add Right Panel", forState: UIControlStateNormal)
-    @addRightPanel.addTarget(self, action: '_addRightPanelTapped:', forControlEvents: UIControlEventTouchUpInside)
-    @addRightPanel.hidden = true
-    self.view.addSubview(@addRightPanel)
+    # @addRightPanel = UIButton.buttonWithType(UIButtonTypeRoundedRect)
+    # @addRightPanel.frame = @removeRightPanel.frame
+    # @addRightPanel.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin
+    # @addRightPanel.setTitle("Add Right Panel", forState: UIControlStateNormal)
+    # @addRightPanel.addTarget(self, action: '_addRightPanelTapped:', forControlEvents: UIControlEventTouchUpInside)
+    # @addRightPanel.hidden = true
+    # self.view.addSubview(@addRightPanel)
+  end
+
+  def tableView(tableView, numberOfRowsInSection:section)
+    @menus.size
+  end
+
+  def tableView(tableView, cellForRowAtIndexPath:indexPath)
+    menu = tableView.dequeueReusableCellWithIdentifier('menu') ||
+      UITableViewCell.alloc.initWithStyle(UITableViewCellStyleDefault, reuseIdentifier:'menu')
+    menu.accessoryType  = UITableViewCellAccessoryDisclosureIndicator
+    menu.textLabel.font = UIFont.boldSystemFontOfSize(14)
+    menu.textLabel.text = @menus[indexPath.row]
+    return menu
+  end
+
+  def tableView(tableView, didSelectRowAtIndexPath:indexPath)
+    # WebViewController.new.tap do |c|
+    #   c.item   = @feed[:channel][:item][indexPath.row]
+    #   navigationController.pushViewController(c, animated:true)
+    # end
   end
 
   #pragma mark - Button Actions

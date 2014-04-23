@@ -23,6 +23,7 @@ Gemfile.lock
 # Ignore all bundle gems and Pods
 /vendor/bundle/
 /vendor/Pods/
+/vendor/Podfile.lock
 
 # Ignore .DS_Store
 .DS_Store

@@ -1,4 +1,4 @@
-class CenterViewController < UIViewController
+class FeedsViewController < UIViewController
   def viewDidLoad
     super
 

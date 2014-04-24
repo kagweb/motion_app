@@ -3,7 +3,11 @@ class MenuViewController < UITableViewController
   def viewDidLoad
     super
 
-    @menus = ['メニューA', 'メニューB', 'メニューC']
+    @menus = [
+              { name: 'Feed', controller: 'FeedsViewController' },
+              { name: 'Feed', controller: 'FeedsViewController' },
+              { name: 'Feed', controller: 'FeedsViewController' }
+             ]
 
     # self.view.backgroundColor = UIColor.redColor
 
@@ -56,18 +60,13 @@ class MenuViewController < UITableViewController
       UITableViewCell.alloc.initWithStyle(UITableViewCellStyleDefault, reuseIdentifier:'menu')
     menu.accessoryType  = UITableViewCellAccessoryDisclosureIndicator
     menu.textLabel.font = UIFont.boldSystemFontOfSize(14)
-    menu.textLabel.text = @menus[indexPath.row]
+    menu.textLabel.text = @menus[indexPath.row][:name]
     return menu
   end
 
   def tableView(tableView, didSelectRowAtIndexPath:indexPath)
     # 選択されたメニューに応じてセンターパネル切替
-    case (indexPath.row)
-    when 0
-      self.sidePanelController.centerPanel = UINavigationController.alloc.initWithRootViewController(CenterViewController.alloc.init)
-    when 1
-      self.sidePanelController.centerPanel = UINavigationController.alloc.initWithRootViewController(CenterViewController.alloc.init)
-    end
+    self.sidePanelController.centerPanel = UINavigationController.alloc.initWithRootViewController(@menus[indexPath.row][:controller].classify.constantize.alloc.init)
   end
 
   #pragma mark - Button Actions

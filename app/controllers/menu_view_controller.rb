@@ -5,16 +5,16 @@ class MenuViewController < UITableViewController
 
     @menus = ['メニューA', 'メニューB', 'メニューC']
 
-    self.view.backgroundColor = UIColor.redColor
+    # self.view.backgroundColor = UIColor.redColor
 
-    @label = UILabel.alloc.init
-    @label.font = UIFont.boldSystemFontOfSize(20.0)
-    @label.textColor = UIColor.whiteColor
-    @label.backgroundColor = UIColor.clearColor
-    @label.text = "Left Panel"
-    @label.sizeToFit
-    @label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin
-    self.view.addSubview(@label)
+    # @label = UILabel.alloc.init
+    # @label.font = UIFont.boldSystemFontOfSize(20.0)
+    # @label.textColor = UIColor.whiteColor
+    # @label.backgroundColor = UIColor.clearColor
+    # @label.text = "Left Panel"
+    # @label.sizeToFit
+    # @label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin
+    # self.view.addSubview(@label)
 
     # @hide = UIButton.buttonWithType(UIButtonTypeRoundedRect)
     # @hide.frame = CGRectMake(20.0, 20.0, 200.0, 40.0)
@@ -61,16 +61,19 @@ class MenuViewController < UITableViewController
   end
 
   def tableView(tableView, didSelectRowAtIndexPath:indexPath)
-    # WebViewController.new.tap do |c|
-    #   c.item   = @feed[:channel][:item][indexPath.row]
-    #   navigationController.pushViewController(c, animated:true)
-    # end
+    # 選択されたメニューに応じてセンターパネル切替
+    case (indexPath.row)
+    when 0
+      self.sidePanelController.centerPanel = UINavigationController.alloc.initWithRootViewController(CenterViewController.alloc.init)
+    when 1
+      self.sidePanelController.centerPanel = UINavigationController.alloc.initWithRootViewController(CenterViewController.alloc.init)
+    end
   end
 
   #pragma mark - Button Actions
 
   def _hideTapped(sender)
-    self.sidePanelController.setCenterPanelHidden(true, animated: true, duration:0.2)
+    self.sidePanelController.setCenterPanelHidden(true, animated: true, duration: 0.2)
     @hide.hidden = true
     @show.hidden = false
   end
